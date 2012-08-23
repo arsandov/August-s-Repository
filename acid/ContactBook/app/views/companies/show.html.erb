@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Company <%= @company.name %> Details</h1>
+
+<p>
+  <b>Name:</b>
+  <%= @company.name %>
+</p>
+
+<p>
+  <b>Adress:</b>
+  <%= @company.adress %>
+</p>
+<p>
+  <b>Contacts:</b>
+  <% @mostrar=Contact.where(:company_id=>@company.id) %>
+  <% @mostrar.each do |contact| %>
+  <%= link_to contact.first_name+' '+contact.last_name ,contact%>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

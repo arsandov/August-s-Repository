@@ -1,0 +1,47 @@
+<%= form_for(@contact) do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<p>
+  <%= f.label 'Photo' %><br />
+  <%= f.file_field :photo %>
+</p>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :email_adress %><br />
+    <%= f.text_field :email_adress %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_numer %><br />
+    <%= f.text_field :phone_numer %>
+  </div>
+  <div class="field">
+    <%= f.label :tweet_user %><br />
+    <%= f.text_field :tweet_user %>
+  </div>
+  <div class="field">
+    <%= f.label :company %><br />
+    <%= f.collection_select :company_id, Company.order('name ASC').all, :id, :name, :include_blank => true %>
+<!--     <%= f.collection_select :company_id, Company.all, :id, :name%>
+ -->  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

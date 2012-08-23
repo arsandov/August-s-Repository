@@ -1,0 +1,78 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contact <%= @contact.first_name %> Details</h1>
+
+<p>
+  <h2>Photo</h2>
+  
+<%= image_tag @contact.photo.url(:small) unless @contact.photo.nil? %>
+
+<!--  <%= image_tag @contact.photo.url(:thumb) unless @contact.photo.nil? %> -->
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @contact.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @contact.last_name %>
+</p>
+
+<p>
+  <b>Email adress:</b>
+  <%= @contact.email_adress %>
+</p>
+
+<p>
+  <b>Phone numer:</b>
+  <%= @contact.phone_numer %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <% if @contact.company==nil %>
+<em>No company added yet</em>
+ <% else %> 
+ <%= link_to @contact.company.name,@contact.company%>
+<% end %>
+
+</p>
+<p>
+  <b>Tweet User:</b>
+  <%= @contact.tweet_user unless @contact.tweet_user.nil? %>
+</p>
+<p>
+  <b>Lasts Tweet:</b>
+  <br>
+ <% if @contact.tweet_user.blank? %>
+    <em>No tweeter user added yet</em>
+ <% else %> 
+ <% if  !Twitter.user?(@contact.tweet_user) %>
+ <em>Invalid tweeter user</em>
+ <% else %> 
+    <% @tweet=Twitter.user_timeline(@contact.tweet_user).first%>
+    <% @tweet2=Twitter.user_timeline(@contact.tweet_user).second %>
+    <% @tweet3=Twitter.user_timeline(@contact.tweet_user).third %>
+    <% @tweet4=Twitter.user_timeline(@contact.tweet_user).fourth %>
+  <% end %>
+    <p>
+    <strong>
+    <%= '#'+@tweet.created_at.to_s.slice(0..19) +'-- '+@tweet.text unless @tweet.nil?%><br />
+    <%= '#'+@tweet2.created_at.to_s.slice(0..19) +'-- '+@tweet2.text unless @tweet.nil?%><br />
+    <%= '#'+@tweet3.created_at.to_s.slice(0..19) +'-- '+@tweet3.text unless @tweet.nil?%><br />
+    <%= '#'+@tweet4.created_at.to_s.slice(0..19) +'-- '+@tweet4.text unless @tweet.nil?%><br />
+    </strong>
+    </p>
+  <% end %>
+  
+  
+  
+  </br>
+  
+</p>
+
+
+<%= link_to 'Edit', edit_contact_path(@contact) %> |
+<%= link_to 'Back', contacts_path %>
