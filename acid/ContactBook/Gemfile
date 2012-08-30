@@ -10,7 +10,8 @@ gem "paperclip", '3.1.4'
 
 gem 'twitter'
 
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 
 
 # Gems used only for assets and not required
